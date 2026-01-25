@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nayeon Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap');
+
+        html{
+            overflow-y: scroll;
+        }
+        
+        body {
+            font-family: 'Source Code Pro', 'Apple SD Gothic Neo', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background-color: #F4F4F4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .korean-style { font-family: 'Apple SD Gothic Neo', sans-serif; letter-spacing: -0.01em; }
+
+        .scale-wrapper {
+            transform: scale(0.7);
+            transform-origin: top center;
+            margin-top: 30px; 
+            width: 1280px;
+            display: flex;
+            flex-direction: column;
+            background-color: #f4f3f3;
+            margin-bottom: -500px;
+        }
+
+        /* [핵심] 폴더들이 쌓이는 그리드 컨테이너 */
+        .stack-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            padding: 0 100.91px;
+            margin-bottom: 40px;
+        }
+
+        /* 모든 레이어를 한 그리드 칸에 중첩시켜 높이 인식이 가능하게 함 */
+        .folder-layer {
+            grid-column: 1;
+            grid-row: 1;
+            position: relative;
+            width: 1078.18px;
+        }
+
+        /* [고정] 탭 스타일: top 7px */
+        .tab-item {
+            position: absolute;
+            height: 44px;
+            top: 7px; /* 요청 수치 고정 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 16px;
+            font-family: 'Source Code Pro';
+            -webkit-mask-image: url('img/folder-index.svg');
+            mask-image: url('img/folder-index.svg');
+            -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* 가이드 라인과 텍스트 정렬 */
+.guide-container {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 16px; /* 선과 텍스트 사이 간격 */
+    width: 100%;
+}
+
+.guide-line {
+    flex-grow: 1; /* 남은 공간을 선으로 채움 */
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.guide-text {
+    flex-shrink: 0; /* 텍스트 너비 고정 */
+    line-height: 1; /* 행간으로 인한 치우침 방지 */
+}
+
+        /* [고정] 몸통 스타일: top 40px */
+        .folder-body {
+            margin-top: 40px; /* 요청 수치 고정 및 높이 확보를 위해 margin 사용 */
+            width: 100%;
+            min-height: 508.52px;
+            border-radius: 0 0 8px 8px;
+            position: relative;
+        }
+
+        .hidden { display: none !important; }
+        header, footer, nav, button, p, span, div { font-weight: 400; }
+    </style>
+</head>
+<body>
+    <div class="scale-wrapper">
+        <div class="w-full h-[60px] px-[110px] pt-[0px] flex justify-between items-start z-[100]">
+            <div class="text-[#2c3831] text-sm cursor-pointer" onclick="showPage('intro')">kimnayeon</div>
+            <div class="flex gap-[19px] text-[#2c3831] text-sm">
+                <span>email</span><span>blog</span><span>instagram</span>
+            </div>
+        </div>
+
+        <div class="stack-container">
+            
+            <div class="folder-layer z-10" style="margin-top: 0px;">
+                <div class="tab-item bg-[#568b5b] w-[240px] left-[40px]">profile</div>
+                <div class="folder-body bg-[#568b5b]"></div>
+            </div>
+
+            <div class="folder-layer z-20" style="margin-top: 60px;">
+                <div class="tab-item bg-[#639a68] w-[250px] left-[40px]">sns marketing</div>
+                <div class="tab-item bg-[#639a68] w-[250px] left-[320px]">pt & proposal</div>
+                <div class="tab-item bg-[#639a68] w-[250px] left-[600px]">web & ui</div>
+                <div class="folder-body bg-[#639a68]"></div>
+            </div>
+
+            <div id="layer-lead-bg" class="folder-layer z-30" style="margin-top: 120px;">
+                <div class="tab-item bg-[#47834c] w-[280px] left-[40px]" onclick="showPage('lead')">Total Design Lead</div>
+                <div class="tab-item bg-[#47834c] w-[220px] left-[350px]">key-visual</div>
+                <div class="tab-item bg-[#47834c] w-[250px] left-[610px]">logo & branding</div>
+                <div class="folder-body bg-[#47834c]"></div>
+            </div>
+
+            <div id="page-intro" class="folder-layer z-40" style="margin-top: 180px;">
+                <div class="tab-item bg-[#639a68] w-[240px] left-[40px]" onclick="showPage('intro')">intro</div>
+                <div class="folder-body bg-[#639a68] p-[64px] overflow-hidden">
+                    <div class="left-[64px] top-[52px] absolute text-white font-['Source_Code_Pro']">
+                        <p class="text-[17px] leading-[22.10px]">Hello, I’m Nayeon.<br/>Welcome to my space. Enjoy the archive.</p>
+                        <p class="text-[15px] mt-6 opacity-80">Last Update: 2026. 01. Based in Seoul</p>
+                    </div>
+                    <img src="img/flower.svg" alt="flower" class="absolute right-[100px] top-[40px] w-[230px] opacity-70">
+                    <div class="absolute bottom-[80px] left-[64px] flex items-end gap-12">
+                        <p class="korean-style text-white/80 text-[15px]">안녕하세요, 디자이너 나연입니다.<br/>폴더 인덱스를 클릭하면 포트폴리오를 감상하실 수 있습니다.</p>
+                        <div class="flex gap-4">
+    <a href="files/kimnayeon-portfolio-25.03.pdf" download="kimnayeon-portfolio-25.03.pdf" class="w-[255px] h-[49px] bg-white rounded-[5px] flex items-center justify-center text-black text-sm korean-style cursor-pointer hover:bg-gray-100 transition-colors">
+        포트폴리오 PDF 다운로드
+    </a>
+                            <div class="w-[255px] h-[49px] bg-white rounded-[5px] flex items-center justify-center text-black text-sm korean-style cursor-pointer">의뢰하기</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-lead-detail" class="folder-layer z-50 hidden" style="margin-top: 120px;">
+<div class="tab-item bg-[#47834c] w-[280px] left-[40px]" onclick="showPage('intro')">
+    Total Design Lead &nbsp; <span style="font-size: 0.6em;">▼</span>
+</div>                <div class="folder-body bg-[#47834c] p-[64px]">
+<div class="guide-container mb-10">
+    <div class="guide-text korean-style text-white text-[16px] font-medium opacity-90">
+        온·오프라인 통합 디자인 실무 총괄
+    </div>
+    <div class="guide-line"></div>
+</div>
+                    <div class="grid grid-cols-5 gap-x-6 gap-y-12 pb-20">
+                        <script>
+                            const items = [
+                                {n:"궁중문화축전", y:"2024", i:"total-01.png"}, {n:"문학주간", y:"2023", i:"total-03.png"},
+                                {n:"문화다양성 주간", y:"2024", i:"total-02.png"}, {n:"광화문마켓", y:"2024", i:"total-06.png"},
+                                {n:"서울빛초롱축제", y:"2024", i:"total-05.png"}, {n:"대한민국은 공연중", y:"2024", i:"total-08.png"},
+                                {n:"파주페어 북앤컬처", y:"2024", i:"total-04.png"}, {n:"이병우 기타콘서트", y:"2023", i:"total-07.png"}
+                            ];
+                            items.forEach(p => {
+                                document.write(`
+                                    <div class="space-y-3">
+                                        <div class="aspect-square bg-white rounded-[12px] overflow-hidden shadow-sm">
+                                            <img src="img/${p.i}" class="w-full h-full object-cover">
+                                        </div>
+                                        <div class="korean-style text-white text-[14px]">
+                                            <p class="font-medium">${p.n}</p>
+                                            <p class="opacity-50 text-[12px]">${p.y}</p>
+                                        </div>
+                                    </div>
+                                `);
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+<div id="page-key-visual" class="folder-layer z-50 hidden" style="margin-top: 120px;">
+    <div class="tab-item bg-[#47834c] w-[220px] left-[350px]">
+        key-visual &nbsp; <span style="font-size: 0.6em; opacity: 0.7;">▼</span>
+    </div>
+
+    <div class="folder-body bg-[#47834c] p-[64px]">
+        <div class="guide-container mb-10">
+            <div class="guide-text korean-style text-white text-[16px] font-medium opacity-90">키비주얼</div>
+            <div class="guide-line"></div>
+        </div>
+
+        <div class="grid grid-cols-5 gap-x-6 gap-y-12 pb-20">
+            <script>
+                const keyItems = [
+                    {n:"문학주간", y:"2023", i:"key-01.png"},
+                    {n:"이병우 기타콘서트", y:"2023", i:"key-02.png"},
+                    {n:"인시드 송년회", y:"2025", i:"key-03.png"},
+                    {n:"문화다양성 주간", y:"2024", i:"key-04.png"},
+                    {n:"밀양힙합페스티벌", y:"2024", i:"key-05.png"},
+                    {n:"베이킹몬 프로모션", y:"2025", i:"key-06.png"},
+                    {n:"HK마트 프로모션", y:"2025", i:"key-07.png"}
+                ];
+                keyItems.forEach(p => {
+                    document.write(`
+                        <div class="space-y-3">
+                            <div class="aspect-[3/4] bg-white rounded-[12px] overflow-hidden shadow-sm">
+                                <img src="img/${p.i}" class="w-full h-full object-cover">
+                            </div>
+                            <div class="korean-style text-white text-[14px]">
+                                <p class="font-medium">${p.n}</p>
+                                <p class="opacity-50 text-[12px]">${p.y}</p>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+        </div>
+    </div>
+</div>
+            
+        </div>
+
+        <div class="w-full px-[110px] pb-[60px] mt-auto z-[100]">
+            <div class="flex justify-between items-end pt-5">
+                <img src="img/ny-logo.svg" 
+     alt="nyeon" 
+     class="h-[60px] w-auto cursor-pointer" 
+     onclick="showPage('intro')">
+                <div class="w-[720px] flex justify-between items-end text-[#545454] text-sm">
+                    <div class="korean-style font-['Source_Code_Pro']">email<br/>oliveves@naver.com</div>
+                    <div class="korean-style font-['Source_Code_Pro']">contact<br/>010 3017 2099</div>
+                    <div class="korean-style font-['Source_Code_Pro'] text-right">Designed & Archived by Nayeon. © 2026</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    /**
+     * 페이지 전환 함수
+     * @param {string} id - 보여줄 페이지의 ID ('intro', 'lead', 'key')
+     */
+    function showPage(id) {
+        const pages = {
+            intro: document.getElementById('page-intro'),
+            lead: document.getElementById('page-lead-detail'),
+            key: document.getElementById('page-key-visual')
+        };
+        const wrapper = document.querySelector('.scale-wrapper');
+
+        // 1. 모든 상세 페이지 숨기기
+        Object.values(pages).forEach(page => {
+            if (page) page.classList.add('hidden');
+        });
+
+        // 2. 선택한 페이지 표시 및 하단 여백(마진) 조절
+        if (id === 'intro') {
+            pages.intro.classList.remove('hidden');
+            // 인트로 화면일 때는 스크롤 없이 푸터를 붙이기 위해 음수 마진 적용
+            wrapper.style.marginBottom = "-480px";
+            window.scrollTo(0, 0); // 페이지 상단으로 이동
+        } else if (pages[id]) {
+            pages[id].classList.remove('hidden');
+            // 상세 페이지(그리드)일 때는 콘텐츠 길이에 맞춰 마진 제거
+            wrapper.style.marginBottom = "0px";
+        }
+    }
+
+    /**
+     * 이벤트 리스너: 문서 전체에서 클릭을 감지하여 탭 처리
+     */
+    document.addEventListener('click', (e) => {
+        // 클릭된 요소가 .tab-item이거나 그 자식인지 확인
+        const tab = e.target.closest('.tab-item');
+        
+        // 탭이 아닌 곳을 눌렀거나, 로고(kimnayeon)를 눌렀을 때의 처리
+        if (!tab) {
+            if (e.target.innerText === 'kimnayeon' || e.target.alt === 'nyeon') {
+                showPage('intro');
+            }
+            return;
+        }
+
+        const tabText = tab.innerText.toLowerCase();
+
+        // 탭 텍스트 내용에 따른 페이지 전환 로직
+        if (tabText.includes('total design lead')) {
+            showPage('lead');
+        } 
+        else if (tabText.includes('key-visual')) {
+            showPage('key');
+        } 
+        else if (tabText.includes('intro')) {
+            showPage('intro');
+        }
+        else if (tabText.includes('logo & branding')) {
+            // 아직 로고 페이지가 없다면 알림이나 인트로로 연결 가능
+            console.log('Logo & Branding 페이지 준비 중');
+        }
+    });
+
+    // 초기 로드 시 실행 (이미지 로딩 등으로 인한 높이 틀어짐 방지)
+    window.addEventListener('load', () => {
+        // 현재 열려있는 페이지 상태에 맞춰 마진 재설정
+        const isIntroVisible = !document.getElementById('page-intro').classList.contains('hidden');
+        document.querySelector('.scale-wrapper').style.marginBottom = isIntroVisible ? "-480px" : "0px";
+    });
+</script>
+</body>
+</html>

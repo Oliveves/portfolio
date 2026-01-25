@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nayeon Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap");
+
+    .source-font {
+      font-family: 'Source Code Pro', monospace;
+    }
+
+    html {
+      overflow-y: scroll;
+    }
+
+    body {
+      font-family: "Source Code Pro", "Apple SD Gothic Neo", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .korean-style {
+      font-family: "Apple SD Gothic Neo", sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .scale-wrapper {
+      transform: scale(0.7);
+      transform-origin: top center;
+      margin-top: 30px;
+      width: 1280px;
+      display: flex;
+      flex-direction: column;
+      background-color: #f4f3f3;
+      margin-bottom: -500px;
+    }
+
+    /* [핵심] 폴더들이 쌓이는 그리드 컨테이너 */
+    .stack-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      padding: 0 100.91px;
+      margin-bottom: 40px;
+    }
+
+    /* 모든 레이어를 한 그리드 칸에 중첩시켜 높이 인식이 가능하게 함 */
+    .folder-layer {
+      grid-column: 1;
+      grid-row: 1;
+      position: relative;
+      width: 1078.18px;
+    }
+
+    /* [고정] 탭 스타일: top 7px */
+    .tab-item {
+      position: absolute;
+      height: 44px;
+      top: 7px;
+      /* 요청 수치 고정 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 16px;
+      font-family: "Source Code Pro";
+      -webkit-mask-image: url("https://raw.githubusercontent.com/Oliveves/portfolio/main/img/folder-index.svg");
+      mask-image: url("https://raw.githubusercontent.com/Oliveves/portfolio/main/img/folder-index.svg");
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      cursor: pointer;
+      z-index: 10;
+      gap: 8px;
+    }
+
+    .tab-arrow {
+      font-size: 9px;
+      vertical-align: 0.5px;
+      /* 미세한 높이 조절 */
+      margin-left: 0;
+      display: inline-block;
+    }
+
+    /* 레이어 전체는 클릭을 통과시키고, 실제 탭과 몸통만 클릭을 받도록 설정 */
+    .folder-layer {
+      pointer-events: none;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .tab-item,
+    .folder-body {
+      pointer-events: auto;
+    }
+
+    .folder-layer {
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .folder-layer.hidden {
+      display: none;
+      opacity: 0;
+    }
+
+    /* 가이드 라인과 텍스트 정렬 */
+    .guide-container {
+      display: flex;
+      align-items: center;
+      /* 세로 중앙 정렬 */
+      gap: 16px;
+      /* 선과 텍스트 사이 간격 */
+      width: 100%;
+    }
+
+    .guide-line {
+      flex-grow: 1;
+      /* 남은 공간을 선으로 채움 */
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .guide-text {
+      flex-shrink: 0;
+      /* 텍스트 너비 고정 */
+      line-height: 1;
+      /* 행간으로 인한 치우침 방지 */
+    }
+
+    /* [고정] 몸통 스타일: top 40px */
+    .folder-body {
+      margin-top: 40px;
+      /* 요청 수치 고정 및 높이 확보를 위해 margin 사용 */
+      width: 100%;
+      min-height: 508.52px;
+      border-radius: 0 0 8px 8px;
+      position: relative;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    header,
+    footer,
+    nav,
+    button,
+    p,
+    span,
+    div {
+      font-weight: 400;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="scale-wrapper">
+    <div class="w-full h-[45px] px-[110px] pt-[0px] flex justify-between items-start z-[100]">
+      <div class="text-[#2c3831] text-sm cursor-pointer" onclick="showPage('intro')">
+        kimnayeon
+      </div>
+      <div class="flex gap-[19px] text-[#2c3831] text-sm">
+        <span>email</span><span>blog</span><span>instagram</span>
+      </div>
+    </div>
+
+    <div class="stack-container">
+      <div class="folder-layer z-10" style="margin-top: 0px">
+        <div class="tab-item bg-[#568b5b] w-[240px] left-[40px]" data-id="profile">
+          profile
+        </div>
+        <div class="folder-body bg-[#568b5b]"></div>
+      </div>
+
+      <div class="folder-layer z-20" style="margin-top: 60px">
+        <div class="tab-item bg-[#639a68] w-[250px] left-[40px]" data-id="sns">
+          sns marketing
+        </div>
+        <div class="tab-item bg-[#639a68] w-[250px] left-[320px]" data-id="pt">
+          pt & proposal
+        </div>
+        <div class="tab-item bg-[#639a68] w-[250px] left-[600px]" data-id="web">
+          web & ui
+        </div>
+        <div class="folder-body bg-[#639a68]"></div>
+      </div>
+
+      <div id="layer-lead-bg" class="folder-layer z-30" style="margin-top: 120px">
+        <div class="tab-item bg-[#47834c] w-[280px] left-[40px]" data-id="lead">
+          Total Design Lead
+        </div>
+        <div class="tab-item bg-[#47834c] w-[220px] left-[350px]" data-id="key-visual">
+          key-visual
+        </div>
+        <div class="tab-item bg-[#47834c] w-[250px] left-[610px]">
+          logo & branding
+        </div>
+        <div class="folder-body bg-[#47834c]"></div>
+      </div>
+
+      <div id="page-intro" class="folder-layer z-40" style="margin-top: 180px">
+        <div class="tab-item bg-[#639a68] w-[240px] left-[40px]" onclick="showPage('intro')" data-id="intro">
+          intro
+        </div>
+        <div class="folder-body bg-[#639a68] p-[64px] overflow-hidden">
+          <div class="left-[64px] top-[52px] absolute text-white font-['Source_Code_Pro']">
+            <p class="text-[17px] leading-[22.10px]">
+              Hello, I’m Nayeon.<br />Welcome to my space. Enjoy the archive.
+            </p>
+            <p class="text-[15px] mt-6 opacity-80">
+              Last Update: 2026. 01. Based in Seoul
+            </p>
+          </div>
+          <img src="https://raw.githubusercontent.com/Oliveves/portfolio/main/img/flower.svg" alt="flower"
+            class="absolute right-[100px] top-[40px] w-[230px] opacity-70" />
+          <div class="absolute bottom-[80px] left-[64px] flex items-end gap-12">
+            <p class="korean-style text-white/80 text-[15px]">
+              안녕하세요, 디자이너 나연입니다.<br />폴더 인덱스를 클릭하면
+              포트폴리오를 감상하실 수 있습니다.
+            </p>
+            <div class="flex gap-4">
+              <a href="https://raw.githubusercontent.com/Oliveves/portfolio/main/files/kimnayeon-portfolio-25.03.pdf"
+                download="kimnayeon-portfolio-25.03.pdf"
+                class="w-[255px] h-[45px] bg-white rounded-[5px] flex items-center justify-center text-black text-sm korean-style cursor-pointer hover:bg-gray-100 transition-colors">
+                포트폴리오 PDF 다운로드
+              </a>
+              <div
+                class="w-[255px] h-[49px] bg-white rounded-[5px] flex items-center justify-center text-black text-sm korean-style cursor-pointer">
+                의뢰하기
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="page-profile" class="folder-layer z-50 hidden" style="margin-top: 0px">
+        <div class="tab-item bg-[#568b5b] w-[240px] left-[40px] cursor-pointer" data-id="profile">
+          <span class="source-font">profile</span> <span class="tab-arrow">▼</span>
+        </div>
+
+        <div class="folder-body bg-[#568b5b] p-[64px] text-white">
+          <div class="flex gap-[52px] mb-[64px] items-start">
+            <div class="w-[220px] h-[330px] bg-[#a8c69f] rounded-[2px] overflow-hidden flex-shrink-0">
+              <img src="https://raw.githubusercontent.com/Oliveves/portfolio/main/img/profile-img.png"
+                class="w-full h-full object-cover" alt="Designer Nayeon">
+            </div>
+
+            <div class="flex-grow">
+              <div class="flex justify-between items-start mb-[-20px]">
+                <div>
+                  <h2 class="text-[22px] font-bold tracking-tight mb-0 source-font">Designer.</h2>
+                  <h1 class="text-[36px] font-bold korean-style mb-10 tracking-tight">
+                    김나연
+                    <span
+                      class="source-font text-[14px] font-normal opacity-90 ml-0 inline-block translate-y-[2px]">1993.
+                      03. 17.</span>
+                  </h1>
+                </div>
+                <img src="https://raw.githubusercontent.com/Oliveves/portfolio/main/img/profile-logo.svg"
+                  class="h-[52px] opacity-100" alt="profile logo">
+              </div>
+
+              <p class="text-[18px] font-medium korean-style mb-[24px] tracking-tight">폭넓은 경험과 깊이 있는 전문성을 가진, 실무에 강한
+                올라운더</p>
+
+              <ul class="space-y-[14px] text-[15px] font-normal korean-style leading-[1.6] opacity-100">
+                <li class="flex gap-3 items-start">
+                  <img src="https://raw.githubusercontent.com/Oliveves/portfolio/main/img/flower-bullet.svg"
+                    class="w-[16px] h-[16px] mt-[4px] flex-shrink-0" alt="bullet">
+                  <span>문화체육관광부, 서울시 등 주요 공공기관의 대규모 프로젝트에서<br>홍보 디자인 총괄을 역임하며 통합적인 브랜드 경험을 구축해 왔습니다.</span>
+                </li>
+                <li class="flex gap-3 items-start">
+                  <img src="https://raw.githubusercontent.com/Oliveves/portfolio/main/img/flower-bullet.svg"
+                    class="w-[16px] h-[16px] mt-[4px] flex-shrink-0" alt="bullet">
+                  <span>국어국문학적 배경을 바탕으로 텍스트의 본질을 꿰뚫는 디자인을 지향하며,<br>포스터 한 장에서 시작된 아이디어를 SNS와 오프라인 공간으로 유연하게
+                    확장시킵니다.</span>
+                </li>
+                <li class="flex gap-3 items-start">
+                  <img src="https://raw.githubusercontent.com/Oliveves/portfolio/main/img/flower-bullet.svg"
+                    class="w-[16px] h-[16px] mt-[4px] flex-shrink-0" alt="bullet">
+                  <span>제안서부터 실무 제작물까지, 디자인이 단순한 장식이 아닌<br>강력한 '설득의 도구'가 될 수 있도록 전략적인 솔루션을 제안합니다.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-x-[110px] gap-y-[60px] pt-[48px] border-t border-white/30">
+
+            <div class="relative">
+              <h3 class="text-[18px] mb-[24px] flex items-center gap-3 source-font"
+                style="color: #FFF; font-weight: 900; letter-spacing: -0.63px;">
+                <span class="w-[5px] h-[16px] bg-white"></span> DESIGN SCOPE
+              </h3>
+
+              <ul class="space-y-[6px] text-[16px] korean-style opacity-100 leading-[1.7]">
+                <li><span class="source-font text-[17px]">Graphic</span> | 그래픽</li>
+                <li><span class="source-font text-[17px]">Presentation</span> | <span class="source-font">PT</span> 및
+                  입찰제안서</li>
+                <li><span class="source-font text-[17px]">SNS contents</span> | <span class="source-font">SNS</span> 마케팅
+                  콘텐츠</li>
+                <li><span class="source-font text-[17px]">Web & UI</span> | 웹, 앱 퍼블리싱 가능</li>
+                <li><span class="source-font text-[17px]">Editorials</span> | 편집인쇄물</li>
+                <li><span class="source-font text-[17px]">Branding</span> | 브랜딩</li>
+                <li><span class="source-font text-[17px]">Package</span> | 패키지</li>
+              </ul>
+            </div>
+
+            <div class="relative">
+              <h3 class="text-[18px] mb-[24px] flex items-center gap-3 source-font"
+                style="color: #FFF; font-weight: 900; letter-spacing: -0.63px;">
+                <span class="w-[5px] h-[16px] bg-white"></span> SKILLS
+              </h3>
+              <ul class="space-y-[6px] text-[16px] korean-style opacity-100 leading-[1.7]">
+                <li><span class="source-font text-[17px]">Illustrator</span> | 일러스트레이터</li>
+                <li><span class="source-font text-[17px]">Photoshop</span> | 포토샵</li>
+                <li><span class="source-font text-[17px]">Figma</span> | 피그마</li>
+                <li><span class="source-font text-[17px]">Powerpoint</span> | 파워포인트</li>
+                <li><span class="source-font text-[17px]">Indesign</span> | 인디자인</li>
+                <li><span class="source-font text-[17px]">Antigravity</span> | 안티그래비티(자동화툴)</li>
+                <li><span class="source-font text-[17px]">Gemini and AI</span> | 각종 <span class="source-font">AI</span>
+                  툴</li>
+              </ul>
+            </div>
+
+            <div class="relative">
+              <h3 class="text-[18px] mb-[24px] flex items-center gap-3 source-font"
+                style="color: #FFF; font-weight: 900; letter-spacing: -0.63px;">
+                <span class="w-[5px] h-[16px] bg-white"></span> CERTIFICATION
+              </h3>
+              <ul class="space-y-[6px] text-[16px] korean-style opacity-100 leading-[1.7]">
+                <li>컴퓨터그래픽스운용기능사 <span class="text-[14px] opacity-70 ml-2 source-font">| 22401102465V</span></li>
+                <li>웹디자인기능사 <span class="text-[14px] opacity-70 ml-2 source-font">| 23403071236A</span></li>
+                <li>데이터분석자격증(<span class="source-font">SQLD</span>) <span
+                    class="text-[14px] opacity-70 ml-2 source-font">| SQLD-058003893</span></li>
+                <li><span class="source-font">TOEIC 845</span> <span class="text-[14px] opacity-70 ml-2 source-font">|
+                    2024. 05.</span></li>
+              </ul>
+            </div>
+
+            <div class="relative">
+              <h3 class="text-[18px] mb-[24px] flex items-center gap-3 source-font"
+                style="color: #FFF; font-weight: 900; letter-spacing: -0.63px;">
+                <span class="w-[5px] h-[16px] bg-white"></span> EDUCATION
+              </h3>
+              <ul class="space-y-[6px] text-[16px] korean-style opacity-90 leading-[1.7]">
+                <li>서울디지털대학 시각디자인 학사 <span class="text-[14px] opacity-70 ml-2 source-font">| 2026. 02.</span></li>
+                <li>국어국문학과 학사 (독학학위제) <span class="text-[14px] opacity-70 ml-2 source-font">| 2020. 10.</span></li>
+                <li>서울예술대학교 문예창작 졸업 <span class="text-[14px] opacity-70 ml-2 source-font">| 2016. 02. - 2019. 02.</span>
+                </li>
+                <li>부산대학교 철학과 <span class="text-[14px] opacity-70 ml-2 source-font">| 2013. 02. - 2015. 06.</span></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div id="page-lead" class="folder-layer z-50 hidden" style="margin-top: 120px">
+        <div class="tab-item bg-[#47834c] w-[280px] left-[40px] cursor-pointer" data-id="lead">
+          Total Design Lead <span class="tab-arrow">▼</span>
+        </div>
+
+        <div class="folder-body bg-[#47834c] p-[64px]">
+          <div class="guide-container mb-10">
+            <div class="guide-text korean-style text-white text-[16px] font-medium opacity-90">
+              온·오프라인 통합 디자인 실무 총괄
+            </div>
+            <div class="guide-line"></div>
+          </div>
+
+          <div class="grid grid-cols-5 gap-x-6 gap-y-12 pb-20">
+          </div>
+        </div>
+      </div>
+
+      <div id="page-key" class="folder-layer z-50 hidden" style="margin-top: 120px">
+        <div class="tab-item bg-[#47834c] w-[220px] left-[350px]">
+          key-visual
+          <span class="tab-arrow">▼</span></span>
+        </div>
+
+        <div class="folder-body bg-[#47834c] p-[64px]">
+          <div class="guide-container mb-10">
+            <div class="guide-text korean-style text-white text-[16px] font-medium opacity-90">
+              키비주얼
+            </div>
+            <div class="guide-line"></div>
+          </div>
+
+          <div class="grid grid-cols-5 gap-x-6 gap-y-12 pb-20">
+
+          </div>
+        </div>
+      </div>
+
+      <div id="page-sns" class="folder-layer z-50 hidden" style="margin-top: 60px">
+        <div class="tab-item bg-[#639a68] w-[250px] left-[40px]">
+          sns marketing <span class="tab-arrow">▼</span>
+        </div>
+        <div class="folder-body bg-[#639a68] p-[64px]">
+          <div class="guide-container mb-10">
+            <div class="guide-text korean-style text-white">
+              SNS 마케팅 디자인
+            </div>
+            <div class="guide-line"></div>
+          </div>
+          <div class="grid grid-cols-5 gap-x-6 gap-y-12 pb-20">
+          </div>
+        </div>
+      </div>
+
+      <div id="page-pt" class="folder-layer z-50 hidden" style="margin-top: 60px">
+        <div class="tab-item bg-[#639a68] w-[250px] left-[320px] cursor-pointer" data-id="pt">
+          <span class="source-font">pt & proposal</span> <span class="tab-arrow">▼</span>
+        </div>
+
+        <div class="folder-body bg-[#639a68] p-[64px]">
+          <div class="guide-container mb-10">
+            <div class="guide-text korean-style text-white text-[16px] font-medium opacity-90">
+              제안서 PT 디자인
+              <span class="text-[12px] opacity-60 ml-2">*보안상의 이유로 디테일한 부분은 블러처리하였습니다.</span>
+            </div>
+            <div class="guide-line"></div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-x-8 gap-y-12 pb-20">
+
+          </div>
+        </div>
+      </div>
+
+      <div id="page-web" class="folder-layer z-50 hidden" style="margin-top: 60px">
+        <div class="tab-item bg-[#639a68] w-[200px] left-[630px] cursor-pointer" data-id="web">
+          <span class="source-font">web & ui</span> <span class="tab-arrow">▼</span>
+        </div>
+
+        <div class="folder-body bg-[#639a68] p-[64px]">
+          <d class="guide-container mb-10">
+            <div class="guide-text korean-style text-white text-[16px] font-medium opacity-90">
+              Web & UI 디자인
+            </div>
+            <div class="guide-line"></div>
+          </d iv>
+
+          <div class="grid grid-cols-3 gap-x-8 gap-y-12 pb-20">
+          </div>
+        </div>
+      </div>
+
+      <div id="page-logo" class="folder-layer z-50 hidden" style="margin-top: 120px">
+        <div class="tab-item bg-[#47834c] w-[250px] left-[610px] cursor-pointer" data-id="logo">
+          logo & branding <span class="tab-arrow">▼</span>
+        </div>
+
+        <div class="folder-body bg-[#47834c] p-[64px]">
+          <div class="guide-container mb-10">
+            <div class="guide-text korean-style text-white text-[16px] font-medium opacity-90">
+              로고 디자인
+            </div>
+            <div class="guide-line"></div>
+          </div>
+
+          <div class="grid grid-cols-5 gap-x-6 gap-y-12 pb-20 logo-grid">
+          </div>
+
+          <div class="guide-container mb-10">
+            <div class="guide-text korean-style text-white text-[16px] font-medium opacity-90">
+              브랜딩
+            </div>
+            <div class="guide-line"></div>
+          </div>
+
+          <div class="grid grid-cols-5 gap-x-6 branding-grid">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full px-[110px] pb-[60px] mt-auto z-[100]">
+      <div class="flex justify-between items-end pt-5 ">
+        <img src="https://raw.githubusercontent.com/Oliveves/portfolio/main/img/ny-logo.svg" alt="nyeon"
+          class="h-[60px] w-auto cursor-pointer" onclick="showPage('intro')" />
+        <div class="w-[720px] flex justify-between items-end text-[#545454] text-sm">
+          <div class="korean-style font-['Source_Code_Pro']">
+            email<br />oliveves@naver.com
+          </div>
+          <div class="korean-style font-['Source_Code_Pro']">
+            contact<br />010 3017 2099
+          </div>
+          <div class="korean-style font-['Source_Code_Pro'] text-right">
+            Designed & Archived by Nayeon. © 2026
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPage(id) {
+      const pages = {
+        intro: document.getElementById("page-intro"),
+        profile: document.getElementById('page-profile'),
+        lead: document.getElementById("page-lead"),
+        key: document.getElementById("page-key"),
+        sns: document.getElementById("page-sns"),
+        pt: document.getElementById("page-pt"),
+        web: document.getElementById("page-web"),
+        logo: document.getElementById("page-logo"),
+      };
+      const wrapper = document.querySelector(".scale-wrapper");
+      const targetPage = pages[id];
+
+      if (!targetPage) return;
+
+      // 토글 기능: 열려있으면 인트로로
+      if (id !== "intro" && !targetPage.classList.contains("hidden")) {
+        showPage("intro");
+        return;
+      }
+
+      Object.values(pages).forEach((p) => p && p.classList.add("hidden"));
+      targetPage.classList.remove("hidden");
+
+      if (id === "intro") {
+        wrapper.style.marginBottom = "-480px";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        wrapper.style.marginBottom = "0px";
+      }
+    }
+
+    document.addEventListener("click", (e) => {
+      const tab = e.target.closest(".tab-item");
+      if (!tab) {
+        if (e.target.innerText.includes("kimnayeon")) showPage("intro");
+        return;
+      }
+
+      // 1. data-id가 있으면 그것을 사용, 없으면 텍스트 추출
+      const targetId = tab.getAttribute("data-id");
+      const text = tab.innerText.toLowerCase().replace("▼", "").trim();
+
+      if (targetId === 'profile' || text.includes('profile')) {
+        showPage('profile');
+      }
+      else if (targetId === "lead" || text.includes("total design lead")) {
+        showPage("lead");
+      } else if (targetId === "key" || text.includes("key-visual")) {
+        showPage("key");
+      } else if (text.includes("pt & proposal")) showPage("pt");
+      else if (text.includes("sns marketing")) showPage("sns");
+      else if (text.includes("logo & branding")) showPage("logo");
+      else if (text.includes("web & ui")) showPage("web");
+      else if (text.includes("intro")) showPage("intro");
+    });
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // [설정] 비브님의 Supabase 정보를 입력하세요
+    const SUPABASE_URL = 'https://bzencnamkphzioevirtj.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_811Q7O6I20MFaQFeM_mcuA_KYFY8s2e';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    /**
+     * 프로젝트 데이터를 불러와서 화면에 출력하는 함수
+     * @param {string} category - 테이블의 category 컬럼 값
+     * @param {string} containerSelector - 데이터를 넣을 요소의 선택자 (ID 또는 클래스)
+     * @param {string} ratioClass - 이미지 비율 (aspect-square, aspect-video 등)
+     * @param {string} subCategory - (선택) 하위 카테고리 필터링 필요 시 사용
+     */
+    async function loadPortfolio(category, containerSelector, ratioClass = "aspect-square", subCategory = null) {
+      let query = supabaseClient
+        .from('project')
+        .select('*')
+        .eq('category', category);
+
+      // subCategory가 인자로 들어오면 필터 추가
+      if (subCategory) {
+        query = query.eq('subcategory', subCategory);
+      }
+
+      const { data, error } = await query.order('id', { ascending: true });
+
+      if (error) {
+        console.error(`${category} 로딩 실패:`, error);
+        return;
+      }
+
+      const container = document.querySelector(containerSelector);
+      if (!container) return;
+
+      container.innerHTML = ''; // 기존 정적 데이터 삭제
+
+      data.forEach(p => {
+        const itemHtml = `
+        <div class="space-y-3">
+          <div class="${ratioClass} bg-white rounded-[12px] overflow-hidden shadow-sm">
+            <img src="${p.image_url}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+          </div>
+          <div class="korean-style text-white text-[14px]">
+            <p class="font-medium tracking-tight">${p.title}</p>
+            <p class="source-font opacity-50 text-[12px] mt-1">${p.year}</p>
+          </div>
+        </div>
+      `;
+        container.insertAdjacentHTML('beforeend', itemHtml);
+      });
+    }
+
+    // 페이지 로드 시 실행
+    window.addEventListener('DOMContentLoaded', () => {
+      // 1. Total Design Lead (정사각형)
+      loadPortfolio('lead', '#page-lead .grid', 'aspect-square');
+
+      // 2. Key Visual (A4 비율: aspect-[1/1.414])
+      loadPortfolio('key', '#page-key .grid', 'aspect-[1/1.414]');
+
+      // 3. PT & Proposal (16:9)
+      loadPortfolio('pt', '#page-pt .grid', 'aspect-video');
+
+      // 4. Web & UI (16:9)
+      loadPortfolio('web', '#page-web .grid', 'aspect-video');
+
+      // 5. SNS Marketing (정사각형)
+      loadPortfolio('sns', '#page-sns .grid', 'aspect-square');
+
+      // 6. Logo & Branding (섹션 구분)
+      // subcategory 컬럼에 'logo-design'과 'branding'으로 구분해서 넣으셨을 때 기준입니다.
+      loadPortfolio('logo', '.logo-grid', 'aspect-square', 'logo-design');
+      loadPortfolio('logo', '.branding-grid', 'aspect-square', 'branding');
+    });
+  </script>
+</body>
+
+</html>
