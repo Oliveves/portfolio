@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Nayeon Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -32,16 +32,39 @@
     }
 
     .scale-wrapper {
-      transform: scale(0.7);
-      transform-origin: top center;
-      margin-top: 30px;
-      width: 1280px;
-      display: flex;
-      flex-direction: column;
-      background-color: #f4f3f3;
-      margin-bottom: -500px;
+    width: 1280px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f3f3;
+    margin: 30px auto -500px auto; /* 중앙 정렬로 변경 */
+    transform-origin: top center;
+    transform: scale(0.7);
+    transition: all 0.2s ease-in-out;
     }
 
+@media (max-width: 1280px) {
+    body {
+        justify-content: flex-start; /* 왼쪽 정렬로 변경하여 잘림 방지 */
+        overflow-x: hidden; /* 가로 스크롤 방지 */
+    }
+    
+    .scale-wrapper {
+        /* 화면 너비에 맞춰 scale 값을 동적으로 계산합니다 */
+        /* 1280px 기준 대비 현재 화면 폭(vw)의 비율 */
+        transform: scale(calc(window.innerWidth / 1280)); 
+        /* 위 수식이 안 먹힐 경우를 대비한 대체 코드: */
+        zoom: calc(100vw / 1280); 
+        
+        margin: 0;
+        transform-origin: top left;
+        width: 1280px; /* 고정 너비를 유지하되 zoom/scale로 맞춤 */
+    }
+}
+
+/* 탭 클릭 시 하단 여백 조정 */
+.scale-wrapper.expanded {
+    margin-bottom: 0px;
+}
     /* [핵심] 폴더들이 쌓이는 그리드 컨테이너 */
     .stack-container {
       display: grid;
