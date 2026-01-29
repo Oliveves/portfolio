@@ -607,43 +607,43 @@ margin: 0;
      * @param {string} subCategory - (선택) 하위 카테고리 필터링 필요 시 사용
      */
     async function loadPortfolio(category, containerSelector, ratioClass = "aspect-square", subCategory = null) {
-      let query = supabaseClient
-        .from('project')
-        .select('*')
-        .eq('category', category);
+  let query = supabaseClient
+    .from('project')
+    .select('*')
+    .eq('category', category);
 
-      // subCategory가 인자로 들어오면 필터 추가
-      if (subCategory) {
-        query = query.eq('subcategory', subCategory);
-      }
+  if (subCategory) {
+    query = query.eq('subcategory', subCategory);
+  }
 
-      const { data, error } = await query.order('id', { ascending: true });
+  const { data, error } = await query.order('id', { ascending: true });
 
-      if (error) {
-        console.error(`${category} 로딩 실패:`, error);
-        return;
-      }
+  if (error) {
+    console.error(`${category} 로딩 실패:`, error);
+    return;
+  }
 
-      const container = document.querySelector(containerSelector);
-      if (!container) return;
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
 
-      container.innerHTML = ''; // 기존 정적 데이터 삭제
+  container.innerHTML = ''; // 기존 데이터 비우기
 
-      data.forEach(p => {
-        const itemHtml = `
-        <div class="space-y-3">
-          <div class="${ratioClass} bg-white rounded-[12px] overflow-hidden shadow-sm">
-            <img src="${p.image_url}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
-          </div>
-          <div class="korean-style text-white text-[14px]">
-            <p class="font-medium tracking-tight">${p.title}</p>
-            <p class="source-font opacity-50 text-[12px] mt-1">${p.year}</p>
-          </div>
+  data.forEach(p => {
+    // [핵심 수정] <a> 태그로 감싸고 href에 상세 페이지 경로와 ID를 넣었습니다.
+    const itemHtml = `
+      <a href="detail.html?id=${p.id}" class="block space-y-3 cursor-pointer group">
+        <div class="${ratioClass} bg-white rounded-[12px] overflow-hidden shadow-sm transition-transform duration-300 group-hover:scale-[1.02]">
+          <img src="${p.image_url}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
         </div>
-      `;
-        container.insertAdjacentHTML('beforeend', itemHtml);
-      });
-    }
+        <div class="korean-style text-white text-[14px]">
+          <p class="font-medium tracking-tight group-hover:underline">${p.title}</p>
+          <p class="source-font opacity-50 text-[12px] mt-1">${p.year}</p>
+        </div>
+      </a>
+    `;
+    container.insertAdjacentHTML('beforeend', itemHtml);
+  });
+}
 
     // 페이지 로드 시 실행
     window.addEventListener('DOMContentLoaded', () => {

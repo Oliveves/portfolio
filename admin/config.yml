@@ -1,0 +1,20 @@
+backend:
+  name: github
+  repo: Oliveves/nayeon-portfolio # 비브님의 실제 리포지토리 주소로 수정
+  branch: main
+
+media_folder: "img/uploads" # 이미지가 저장될 폴더
+public_folder: "/img/uploads"
+
+collections:
+  - name: "projects"
+    label: "포트폴리오 게시글"
+    folder: "content/projects" # 글이 저장될 폴더
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "제목", name: "title", widget: "string"}
+      - {label: "연도", name: "year", widget: "string"}
+      - {label: "Scope", name: "scope", widget: "text"}
+      - {label: "Client", name: "client", widget: "string"}
+      - {label: "상세 이미지들", name: "images", widget: "list", field: {label: "이미지", name: "image", widget: "image"}}
