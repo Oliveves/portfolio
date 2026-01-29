@@ -2,6 +2,9 @@ backend:
   name: git-gateway # github에서 git-gateway로 변경
   branch: main
 
+site_url: https://nayeon-portfolio.com 
+display_url: https://nayeon-portfolio.com
+
 media_folder: "img/uploads"
 public_folder: "/img/uploads"
 
