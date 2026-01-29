@@ -9,7 +9,8 @@
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    // 도메인 연결을 확실히 고정합니다
+    // [핵심] CMS가 넷리파이 API를 못 찾을 때 강제로 주소를 알려주는 설정입니다.
+    // 비브님의 nayeon-portfolio.com 도메인과 넷리파이 서버를 직접 잇는 다리 역할을 해요.
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) {
@@ -19,6 +20,11 @@
         }
       });
     }
+
+    // CMS 설정이 로드되기 전에 넷리파이 사이트 ID를 강제로 주입합니다.
+    window.CMS_API_CONFIG = {
+      site_id: 'aesthetic-cranachan-03a150.netlify.app' // 비브님의 원래 넷리파이 주소
+    };
   </script>
 </body>
 </html>
