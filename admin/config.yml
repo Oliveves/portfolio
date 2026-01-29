@@ -1,15 +1,15 @@
 backend:
   name: github
-  repo: Oliveves/nayeon-portfolio # 비브님의 실제 리포지토리 주소로 수정
+  repo: Oliveves/portfolio
   branch: main
 
-media_folder: "img/uploads" # 이미지가 저장될 폴더
+media_folder: "img/uploads"
 public_folder: "/img/uploads"
 
 collections:
   - name: "projects"
     label: "포트폴리오 게시글"
-    folder: "content/projects" # 글이 저장될 폴더
+    folder: "content/projects"
     create: true
     slug: "{{slug}}"
     fields:
