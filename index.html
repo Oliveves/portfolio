@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-<meta name="viewport" content="width=1050, user-scalable=no">
+<meta name="viewport" content="width=1000, user-scalable=no">
 <title>Nayeon Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -33,30 +33,27 @@ margin: 0;
       letter-spacing: -0.01em;
     }
 
-    .scale-wrapper {
-width: 1280px;
+.scale-wrapper {
+    width: 1280px;
     display: flex;
     flex-direction: column;
     background-color: #f4f3f3;
-    /* transform: scale(0.7)은 데스크탑에서만 쓰고, 모바일은 브라우저에 맡깁니다 */
     transform-origin: top center;
+    transform: scale(0.7); /* 데스크탑에선 0.7배 축소 */
+    margin: 30px auto -350px auto; 
     transition: all 0.3s ease;
-    }
-
-/* 데스크탑(큰 화면)에서만 0.7배로 작게 보여주기 */
-@media (min-width: 1281px) {
-    .scale-wrapper {
-        transform: scale(0.7);
-        margin-top: 30px;
-        margin-bottom: -350px;
-    }
 }
 
-/* 모바일/태블릿에서는 스케일을 1로 돌리고 중앙 정렬 */
 @media (max-width: 1280px) {
+    body {
+        display: block; /* 중앙 정렬 해제하고 브라우저 줌에 맡김 */
+        min-width: 1000px; /* viewport width와 일치시킴 */
+    }
+    
     .scale-wrapper {
-        transform: scale(1);
-        margin: 0 auto;
+        transform: scale(1) !important; /* 모바일선 강제 축소를 풀고 100%로! */
+        margin: 0 auto; /* 중앙 배치 */
+        width: 1280px; /* 원래 너비 유지 */
     }
 }
     
