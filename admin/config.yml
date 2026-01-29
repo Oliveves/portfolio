@@ -1,6 +1,5 @@
 backend:
-  name: github
-  repo: Oliveves/portfolio
+  name: git-gateway # github에서 git-gateway로 변경
   branch: main
 
 media_folder: "img/uploads"
