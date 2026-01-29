@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=1000, user-scalable=no">
 <title>Nayeon Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap");
 
@@ -668,6 +669,17 @@ margin: 0;
       loadPortfolio('logo', '.branding-grid', 'aspect-square', 'branding');
     });
   </script>
+  <script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 </body>
 
 </html>
